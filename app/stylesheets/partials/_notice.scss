@@ -1,0 +1,21 @@
+div#notice {
+  @include column(12, true);
+  @include push(6);
+  position: absolute;
+  text-align: center;
+	padding: 17px 25px;
+	font-size: 130%;
+	color: #555;
+	background: #f9cd3a;
+	border: 1px solid #f7b738;
+	border-top: none;
+	font-weight: bold;
+  z-index: 100;
+	@include text-shadow(0,1px,0,rgba(255,255,255,0.7));
+	@include border-bottom-radius(2px);
+	@include box-shadow(rgba(0,0,0,0.3));
+	strong {
+	  color: #fff;
+	  @include text-shadow(0,1px,0,rgba(0,0,0,0.5));
+	}
+}

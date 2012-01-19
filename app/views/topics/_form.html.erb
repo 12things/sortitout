@@ -1,0 +1,11 @@
+<%= form_for(@topic) do |f| %>
+
+  <div class="field">
+    <%= f.label :title, 'Titel' %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <div class="info">Themen sind <b>privat</b>, bis du sie anderen freigibst.</div>
+    <%= f.submit "Speichern" %>
+  </div>
+<% end %>

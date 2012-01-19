@@ -1,0 +1,10 @@
+<div id="posts" class="compact_input">
+  <%= render_tree posts do |post, child| %>
+  <li>
+    <%= render "post", {:topic => topic, :post => post} %>
+    <%= child %>
+  </li>
+  <% end %>
+  
+  <div id="new-posts-bar" data-href-refresh="<%= refresh_topic_posts_path(@topic) %>" data-href-check="<%= check_for_new_topic_posts_path(@topic) %>" style="display:none;">&nbsp;</div>
+</div>

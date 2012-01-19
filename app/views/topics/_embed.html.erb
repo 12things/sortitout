@@ -1,0 +1,9 @@
+<article id="embed_<%= embed.id %>">
+  <header>
+		<h3><%= embed.title %></h3>
+	</header>
+	<p><%= raw embed.html %></p>
+  <footer>
+		<%= link_to ("@"+embed.post.id.to_s+" ("+embed.post.hotness.to_s+"%)", topic_posts_path(@topic, :anchor => "post_"+embed.post.id.to_s)) %>
+	</footer>
+</article>

@@ -1,0 +1,36 @@
+<article id="post_<%= post.id %>" data-post-id="<%= post.id %>" class="<%= css_class post %>">
+  <header>
+    <div class="meter" value="<%= post.hotness %>"><%= post.hotness %>%</div>
+    <span class="meta"><a href="#" data-post-id="<%= post.id %>" class="reply">@<%= post.id %></a></span>
+    <div>
+      <time pubdate="pubdate"><%= time_ago_in_words(post.created_at) %></time>
+    </div>
+  </header>
+  <% unless post.body.blank? %>
+    <p><%= auto_link(replace_hashtags_with_links(post.body, topic)).gsub(/\n/, '<br>') %></p>
+  <% end %>
+  
+  <% if post.embed_type == 'photo' %>
+    <p>
+      <% post.embeds.each do |embed| %>
+        <%= lightbox_for(embed, {:gallery => "gallery_post_#{post.id}"}) %>
+      <% end %>
+    </p>
+  <% elsif post.embed_type == 'video' %>
+    <p>
+      <% post.embeds.each do |embed| %>
+        <%= raw embed.html %>
+      <% end %>
+    </p>    
+  <% end %>
+
+  <footer>
+    <span class="controls">
+      <a href="<%= vote_topic_post_path(topic, post) %>" data-post-id="<%= post.id %>" class="icon vote">Abstimmen</a>
+      <a href="#" data-post-id="<%= post.id %>" class="icon reply">Antworten</a>
+      <% if post.owner? current_user %>
+        <%= link_to 'Löschen', [topic, post], :confirm => 'Bist du sicher?', :method => :delete, :class => 'icon delete', :remote => true %>
+      <% end %>
+    </span>
+  </footer>
+</article>

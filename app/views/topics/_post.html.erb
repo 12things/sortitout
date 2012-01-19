@@ -1,0 +1,26 @@
+<article id="post_<%= post.id %>" data-post-id="<%= post.id %>" class="<%= css_class post %>">
+  <header>
+    <div class="meter" value="<%= post.hotness %>"><%= post.hotness %>%</div>
+    <span class="meta"><%= link_to ("@"+post.id.to_s+" ("+post.hotness.to_s+"%)", topic_posts_path(@topic, :anchor => "post_"+post.id.to_s)) %></span>
+    <div>
+      <time pubdate="pubdate"><%= time_ago_in_words(post.created_at) %></time>
+    </div>
+  </header>
+  <% unless post.body.blank? %>
+    <p><%= auto_link(post.body) %></p>
+  <% end %>
+  
+  <% if post.embed_type == 'photo' %>
+    <p>
+      <% post.embeds.each do |embed| %>
+        <%= lightbox_for(embed, {:gallery => "gallery_post_#{post.id}"}) %>
+      <% end %>
+    </p>
+  <% elsif post.embed_type == 'video' %>
+    <p>
+      <% post.embeds.each do |embed| %>
+        <%= raw embed.html %>
+      <% end %>
+    </p>    
+  <% end %>
+</article>

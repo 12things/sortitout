@@ -1,0 +1,78 @@
+<% if current_user %>
+  <% unless current_user.topics.empty? %>
+  <h1>Meine Themen  <%= link_to 'Neues Thema', new_topic_path, :class => "button positive", :style => "float:right;" %></h1>
+  <table>
+    <tbody>
+    <% current_user.topics.each do |topic| %>
+      <tr>
+        <th><%= link_to topic.title, topic_posts_path(topic) %></th>
+        <td><%= pluralize(topic.posts.new_since(current_user.last_login_at).count, 'neuer Post', 'neue Posts') %></td>
+        <td><%= pluralize(topic.posts_count, 'Post', 'Posts') %></td>
+        <td><%= pluralize(topic.embeds_count, 'Medium', 'Medien') %></td>
+        <td><%= link_to(pluralize(topic.memberships.count, 'Freigabe', 'Freigaben'), topic) %></td>
+        <td><%= link_to 'Löschen', topic, :confirm => 'Bist du sicher?', :method => :delete, :class => 'icon large delete' %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% else %>
+  <h1>Meine Themen</h1>
+  <p>
+    <b>Lege jetzt dein erstes Thema an. Klicke einfach folgenden Button:</b>
+  </p>
+  <p style="margin-left: 120px;"><%= link_to 'Neues Thema', new_topic_path, :class => "button positive" %></p>
+  <% end %>
+  
+  <% unless current_user.assigned_topics.empty? %>
+  <h1>Mir freigegebene Themen</h1>
+  <table>
+    <tbody>
+    <% current_user.assigned_topics.each do |topic| %>
+      <tr>
+        <th><%= link_to topic.title, topic_posts_path(topic) %></th>
+        <td><%= pluralize(topic.posts.new_since(current_user.last_login_at).count, 'neuer Post', 'neue Posts') %></td>
+        <td><%= pluralize(topic.posts_count, 'Post', 'Posts') %></td>
+        <td><%= pluralize(topic.embeds_count, 'Medium', 'Medien') %></td>
+        <td><%= pluralize(topic.memberships.count, 'Freigabe', 'Freigaben') %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+  
+<% else %>
+<div id="welcome">
+  <div class="left">
+		<h2>sort it out <%= image_tag 'phonetics.png' %></h2>
+
+		<div>engl. für: etwas anpacken, eine Lösung finden</div>
+		
+		<p class="description">
+		  Sort it out ist ein <%= link_to ('#simples', '#', :class => 'carbon-load', 
+	        'data-carbon-href' => show_associations_path, 
+	        'data-carbon-params' => {:tag => "simples"}.to_json)
+	    %> <%= link_to ('#brainstorming', '#', :class => 'carbon-load', 
+	        'data-carbon-href' => show_associations_path, 
+	        'data-carbon-params' => {:tag => "brainstorming"}.to_json)
+	    %>-Tool, mit dem du alleine oder in einer <%= link_to ('#gruppe', '#', :class => 'carbon-load', 
+	        'data-carbon-href' => show_associations_path, 
+	        'data-carbon-params' => {:tag => "gruppe"}.to_json)
+	    %> <%= link_to ('#kreativ', '#', :class => 'carbon-load', 
+	        'data-carbon-href' => show_associations_path, 
+	        'data-carbon-params' => {:tag => "kreativ"}.to_json)
+	    %> werden kannst.
+		</p>
+		<div class="gallery">
+		  <%= link_to(image_tag('detail_thumb.png'), '/images/topic_detail.jpg', {:rel => 'lightbox[screenshots]', :title => "Einträge"}) %>
+		  <%= link_to(image_tag('associations_thumb.png'), '/images/associations.jpg', {:rel => 'lightbox[screenshots]', :title => "Assoziationen"}) %>
+		  <%= link_to(image_tag('overview_thumb.png'), '/images/topics_overview.jpg', {:rel => 'lightbox[screenshots]', :title => "Themenübersicht"}) %>
+		</div>
+	</div>
+	
+	<div class="right">
+		<h2>Registrierung</h2>
+		<p>Hier kannst du dich kostenlos anmelden:</p>
+		<%= render "form" %>
+	</div>
+</div>
+<% end %>

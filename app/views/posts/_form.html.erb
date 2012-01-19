@@ -1,0 +1,26 @@
+<%= form_for([@topic, @post], :remote => true, :html => {:class => 'compact'}) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <fieldset>
+    <h3>What's on your mind?</h3>
+    <div class="field">
+      <%= f.text_area :original_body, :size => "80x2", :value => @share %>
+    </div>
+
+    <div class="actions">
+      <%= image_tag 'loading.gif', :class => 'loading', :style => 'display:none;' %>
+      <span class="info">Du kannst #Hashtags verwenden</span>
+      <%= f.submit 'Senden' %>
+    </div>
+  </fieldset>
+<% end %>

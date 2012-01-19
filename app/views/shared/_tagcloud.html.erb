@@ -1,0 +1,10 @@
+<ul class="tagcloud">
+	<% tag_cloud(tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class| %>
+	  <li class="<%= css_class %><%= tag.name==@tag ? ' current' : '' %>">
+	    <%= link_to (tag.name.strip, '#', :class => 'carbon-load', 
+	        'data-carbon-href' => show_associations_path, 
+	        'data-carbon-params' => {:topic_id => @topic.id, :tag => tag.name}.to_json)
+	    %>
+	  </li>
+	<% end %>
+</ul>

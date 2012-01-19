@@ -1,0 +1,59 @@
+body.bp {
+  ul.tagcloud {
+		display: block;
+		text-align: justify;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 30px;
+    li {
+	    list-style-position: inside;
+			list-style-type: none;
+      display: inline;
+      margin: 0;
+      margin-right: 5px;
+      padding: 0;
+    }
+    .tag1 { font-size: 1em; }
+    .tag2 { font-size: 2em; }
+    .tag3 { font-size: 3em; }
+    .tag4 { font-size: 4em; }
+    .current a { text-decoration: underline; }
+  }
+  
+  #colwrapper {
+    @include clearfix;
+    h2 {
+      margin-top: 0;
+    }
+  }
+  
+	#main {
+    @include column(18);
+	}
+	#secondary {
+		@include column(4, true);
+		@include prepend(2);
+		aside {
+			margin: 10px 0;
+			display: block;
+		}
+	}
+	
+	ul.imagelist {
+		display: block;
+		text-align: center;
+    margin: 0;
+    padding: 0;
+    
+    li {
+	    list-style-position: inside;
+			list-style-type: none;
+      display: inline;
+			img {
+			  margin: 5px;
+			  border: 10px solid #000;
+			}
+    }
+	}
+	
+}

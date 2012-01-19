@@ -1,0 +1,23 @@
+<div id="carbon" style="display:none;">
+  <div class="container">
+    <div id="carbon-content">
+      <div class="body">&nbsp;</div>
+    </div>
+    <div class="header">
+      <%= link_to '', '#', :class => 'icon carbon-close' %>
+      <%= image_tag 'loading_black.gif', :class => 'loading', :style => 'display:none;' %>
+    </div>
+  </div>
+</div>
+<% if false %>
+<!--
+  data-carbon-href ist required
+  data-carbon-params ist optional
+    -> da kann man optional angeben, dass es per GET abgeschickt werden soll
+-->
+<%= link_to 'Blabla', '#', :class => 'carbon-load', 'data-carbon-href' => topic_posts_path(@topic) %>
+
+<%= link_to 'Carbon', '#', :class => 'carbon-load', 
+        'data-carbon-href' => topic_posts_path(@topic), 
+        'data-carbon-params' => '{"method": "GET", "some": "parametikowski"}' %>
+<% end %>

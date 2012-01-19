@@ -1,0 +1,23 @@
+<% if @topic && @tags %>
+  <h1>Tags</h1>
+  <%= render 'shared/tagcloud', {:tags => @tags, :topic => @topic} %>
+<% end %>
+
+<div class="two-col">
+  <div class="left">
+    <h1>Delicious</h1>
+    <ul>
+    	<% @delicious_links.each do |item| %>
+    		<li><%= link_to(item["d"], item["u"]) %></li>
+    	<% end %>
+    </ul>
+  </div>
+</div>
+
+<h1>Flickr</h1>
+<ul class="imagelist">
+	<% @flickr_photos['items'].each do |item| %>
+		<li><%= link_to(image_tag(item["media"]["m"]), item["link"], {"title" => item["title"], :class => 'post_link'}) %></li>
+	<% end %>
+</ul>
+

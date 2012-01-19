@@ -1,0 +1,27 @@
+<%= render 'shared/backlink' %>
+
+<% if @topic.owner? current_user %>
+  <h1>Freigaben für <%= @topic.title %></h1>
+  <% unless @topic.memberships.empty? %>
+    <ul>
+      <% @topic.memberships.each do |membership| %>
+        <li id="membership_<%= membership.id %>"><%= membership.user.email %>&nbsp;&nbsp;<%= link_to 'Freigabe entfernen', [@topic, membership], :confirm => 'Bist du sicher?', :method => :delete, :class => 'icon delete', :remote => true %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_tag(create_multiple_memberships_path) do %>
+    <fieldset>
+      <%= hidden_field_tag :topic_id, @topic.id %>
+    
+      <h3>E-Mails mit Komma getrennt</h3>
+      <div class="field">
+        <%= text_area_tag :emails %>
+      </div>
+
+      <div class="actions">
+        <%= submit_tag "Freigeben" %>
+      </div>
+    </fieldset>
+  <% end %>
+<% end %>

@@ -1,0 +1,61 @@
+body.bp {
+  &.carbon {
+    overflow: hidden;
+    padding-right: 15px;
+  }
+  #carbon {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom:0;
+    overflow-y: auto;
+    z-index: 1000;
+    background: rgba(0,0,0,0.8);
+    
+    .container {
+      @include container;
+      div.header {
+        position: absolute;
+        height: 32px;
+        width: 950px;
+        top: 40px;
+        
+        img.loading {
+          width: 32px;
+          height: 32px;
+          margin-left: 440px;
+          display: block;
+          position: absolute;
+        }
+        a.icon {
+          &.carbon-close {
+            display: block;
+            position: absolute;
+            right: 0;
+            padding: 0;
+            height: 32px;
+            width: 32px;
+            background: sprite-image('../images/close.png', 0px, 1px, 20px) no-repeat;
+          }
+        }
+      }
+      #carbon-content {
+        @include column($blueprint-grid-columns, true);
+        color: #fff;
+        position: relative;
+        
+        
+        h1, h2, h3, h4, h5, h6 {
+          @include text-shadow(0, 1px, 0, rgba(255,255,255,0.9));
+        }
+        a, a:visited {
+          color: #fff;
+        }
+        a:hover, a:active {
+          color: #fff;
+          text-decoration: underline;
+        }
+
+        
+      }
+    }
+  }
+}

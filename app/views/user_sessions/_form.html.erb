@@ -1,0 +1,29 @@
+<% if @user_session.errors.any? %>
+  <div class="error_explanation">
+    <ul>
+      <% @user_session.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% form_for @user_session, :url => user_sessions_path do |f| %>
+  
+  <div class="field">
+    <%= f.label :email, 'E-Mail' %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, 'Passwort' %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.check_box :remember_me %>&nbsp;<%= f.label :remember_me, 'Angemeldet bleiben', :style => 'display: inline;' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Einloggen' %>
+  </div>
+<% end %>

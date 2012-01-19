@@ -1,0 +1,16 @@
+<%= render 'shared/backlink' %>
+
+<h1 style="margin-bottom: 0.5em;">
+  <%= raw(@topic.title) %>
+  <small class="controls">
+    <%= link_to('hot', '#', {:class => 'filter_hot'}) %>
+    |
+    <%= link_to('new', '#', {:class => 'filter_new'}) %>
+  </small>
+</h1>
+
+<%= render 'shared/tagcloud', {:tags => @tags, :topic => @topic} %>
+
+<%= render 'thread', {:posts => @posts, :topic => @topic} %>
+
+<%= render 'form' %>
